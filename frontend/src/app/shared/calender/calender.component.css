@@ -1,0 +1,40 @@
+.grid { 
+    display: grid;
+    grid-template-columns: 14.285714286% 14.285714286% 14.285714286% 14.285714286% 14.285714286% 14.285714286% 14.285714286%;
+}
+
+.grid2 { 
+    display: grid;
+    grid-template-columns: 40% 20% 40%;
+}
+
+input{
+    text-align: center;
+}
+
+.border{
+    border-style: solid;
+    border-color: black;
+}
+
+.white-text{
+    color: white;
+}
+
+h1 {
+    text-align: center;
+}
+
+h5{
+    font-weight: bold;
+    font-style: Helvetica;
+}
+
+.centered{
+    text-align: center;
+}
+
+.padded{
+    padding-left: 10px;
+    padding-bottom: 50px;
+}

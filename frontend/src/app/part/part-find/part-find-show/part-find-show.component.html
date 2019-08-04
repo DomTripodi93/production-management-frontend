@@ -1,0 +1,52 @@
+<div *ngIf='parts.length > 0 && parts.length < 2'>
+    <ul class='list-group'>
+        <li class=list-group-item *ngFor="let part of parts; let i = index" >
+      <h3>{{part.part}}</h3>
+      <h4 *ngIf="part.job">Current Job: {{part.job}}</h4>
+      <h4 *ngIf="part.machine">Current Machine: {{part.machine}}</h4>
+      <h4 *ngIf="part.cycle_time">Cycle Time: {{part.cycle_time}}</h4>
+      <h4 *ngIf="part.order_quantity">Order Quantity: {{part.order_quantity}}</h4>
+      <h4 *ngIf="part.weight_recieved">Weight Recieved: {{part.weight_recieved}}</h4>
+      <h4 *ngIf="part.weight_quantity">Potential Quantity by Weight: {{part.weight_quantity}}</h4>
+      <h4 *ngIf="part.weight_length">Total Length of Bars by Weight: {{part.weight_length}}</h4>
+      <h4 *ngIf="part.possible_quantity">Possible Quantity by Bars: {{part.possible_quantity}}</h4>
+      <h4 *ngIf="part.remaining_quantity">Remaining Quantity: {{part.remaining_quantity}}</h4>
+      <h4 *ngIf="part.heat_lot">Heat Lot#: {{part.heat_lot}}</h4>
+      <h4 *ngIf="part.cycle_time && part.remaining_quantity">Hours Remaining: {{((part.cycle_time * part.remaining_quantity)/3600).toFixed(2)}}</h4>
+      <h4 *ngIf="part.cycle_time && part.possible_quantity">Total Hours: {{((part.cycle_time * part.possible_quantity)/3600).toFixed(2)}}</h4>
+      <h4 *ngIf="part.cycle_time && part.weight_quantity && !part.possible_quantity">Total Hours: {{((part.cycle_time * part.weight_quantity)/3600).toFixed(2)}}</h4>
+          <br><br>
+          <div class="grid">
+            <button class='btn btn-primary' routerLink="../edit/{{part.id}}">Edit Part</button>
+            <button class='btn btn-danger' (click)="onDelete(part.part, part.id)">Delete Part</button>
+          </div>
+        </li>
+    </ul>
+</div>
+<div *ngIf='parts.length > 1'>
+  <div *ngFor="let part of parts; let i=index"> 
+    <div routerLink="../part={{part.part}}" class="border">
+      <h3>{{part.part}}</h3>
+      <h4 *ngIf="part.job">Current Job: {{part.job}}</h4>
+      <h4 *ngIf="part.machine">Current Machine: {{part.machine}}</h4>
+      <h4 *ngIf="part.cycle_time">Cycle Time: {{part.cycle_time}}</h4>
+      <h4 *ngIf="part.order_quantity">Order Quantity: {{part.order_quantity}}</h4>
+      <h4 *ngIf="part.weight_recieved">Weight Recieved: {{part.weight_recieved}}</h4>
+      <h4 *ngIf="part.weight_quantity">Potential Quantity by Weight: {{part.weight_quantity}}</h4>
+      <h4 *ngIf="part.weight_length">Total Length of Bars by Weight: {{part.weight_length}}</h4>
+      <h4 *ngIf="part.possible_quantity">Possible Quantity by Bars: {{part.possible_quantity}}</h4>
+      <h4 *ngIf="part.remaining_quantity">Remaining Quantity: {{part.remaining_quantity}}</h4>
+      <h4 *ngIf="part.heat_lot">Heat Lot#: {{part.heat_lot}}</h4>
+      <div class="grid">
+        <button class='btn btn-primary' routerLink="../edit/{{part.id}}">Edit Part</button>
+        <button class='btn btn-danger' (click)="onDelete(part.part, part.id)">Delete Part</button>
+      </div>
+    </div>
+    <br>
+  </div>
+</div>
+
+
+<div *ngIf='parts.length == 0'>
+    <h2> No parts for this Search </h2>
+</div>

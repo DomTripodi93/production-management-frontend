@@ -1,0 +1,53 @@
+<nav class='navbar navbar-default'>
+    <div class='container-fluid'>
+        <div class='navbar-header'>
+          <div class='navbar-default'><strong>
+            <ul class = 'nav navbar-nav'>
+              <li routerLinkActive="!active"><a routerLink='/'>Home</a></li>
+              <li
+                *ngIf="!id" 
+                routerLinkActive="active">
+                <a routerLink='/register'>Signup</a></li>
+              <li
+                *ngIf="!id" 
+                routerLinkActive="active">
+                <a routerLink='/login'>Signin</a></li>
+              <li
+                *ngIf="id" 
+                routerLinkActive="active">
+                <a routerLink='/logout'>Signout</a></li>
+              <li
+                *ngIf="id" 
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}">
+                <a routerLink='/parts'>Parts</a></li>
+              <li
+                *ngIf="id" 
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}">
+                <a routerLink='/machine'>Machines</a></li>
+              <li 
+                *ngIf="id" 
+                routerLinkActive="active" 
+                [routerLinkActiveOptions]="{exact: true}">
+                <a routerLink='/production'>Production</a></li>
+              <li
+                *ngIf="id" 
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}">
+                <a routerLink='/hourly'>Hourly</a></li>
+              <li 
+                *ngIf="id" 
+                routerLinkActive="active" 
+                [routerLinkActiveOptions]="{exact: true}">
+                <a routerLink='/parts/calculator'>Length From Weight</a></li>
+              <li 
+                *ngIf="id" 
+                routerLinkActive="active" 
+                [routerLinkActiveOptions]="{exact: true}">
+                <a routerLink='/changes'>Change Log</a></li>
+            </ul>
+          </strong></div>
+        </div>
+    </div>
+</nav>

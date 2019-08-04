@@ -1,0 +1,16 @@
+<div class='grid' >
+  <div *ngFor="let machine of machines; let i=index"> 
+    <div class="border">
+      <h6 class="white-text">0</h6>
+      <h3>{{machine.machine}}</h3>
+      <h4 *ngIf="machine.current_job">Current Job: {{machine.current_job}}</h4>
+      <h4 class="white-text" *ngIf="!machine.current_job">0</h4>
+      <div class="grid2">
+        <button class='btn btn-primary' routerLink="edit/{{machine.id}}">Edit Machine</button>
+        <button class='btn btn-danger' (click)="onDelete(machine.id, machine.machine)">Delete Machine</button>
+      </div>
+    </div>
+    <div></div>
+    <br>
+  </div>
+</div>
