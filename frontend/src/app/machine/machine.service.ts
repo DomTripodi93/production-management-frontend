@@ -8,7 +8,6 @@ import { Change } from '../shared/change.model';
 
 @Injectable({providedIn: 'root'})
 export class MachineService {
-    apiUrl = 'http://localhost:8000/api';
     machChanged = new Subject();
     model = "Machine"
 
@@ -19,7 +18,7 @@ export class MachineService {
 
     fetchMachine(search) {
         return this.http.get(
-          this.apiUrl + '/machine/?search=' + search
+          this.auth.apiUrl + '/machine/?search=' + search
         )
         .pipe(
           map((responseData: Machine[]) => {
@@ -34,7 +33,7 @@ export class MachineService {
 
     fetchMachineById(id) {
         return this.http.get(
-          this.apiUrl + '/machine/' + id + "/"
+          this.auth.apiUrl + '/machine/' + id + "/"
         )
         .pipe(
           map((responseData: Machine) => {
@@ -45,7 +44,7 @@ export class MachineService {
   
     fetchAllMachines() {
         return this.http.get(
-          this.apiUrl + '/machine/'
+          this.auth.apiUrl + '/machine/'
         )
         .pipe(
           map((responseData: Machine[]) => {
@@ -57,7 +56,7 @@ export class MachineService {
 
     fetchMachineJobs(){
         return this.http.get(
-          this.apiUrl + '/machine/?ordering=-current_job'
+          this.auth.apiUrl + '/machine/?ordering=-current_job'
         )
         .pipe(
           map((responseData: Machine[]) => {
@@ -72,7 +71,7 @@ export class MachineService {
             data.current_job=null
         }
           return this.http.post(
-            this.apiUrl + '/machine/', data
+            this.auth.apiUrl + '/machine/', data
           );
       }
 
@@ -82,7 +81,7 @@ export class MachineService {
           this.auth.logChanges(old_values, this.model, "Change Job", id).subscribe();
         })
         return this.http.patch(
-          this.apiUrl + '/machine/' + id + "/", job
+          this.auth.apiUrl + '/machine/' + id + "/", job
         );
 
       }
@@ -96,7 +95,7 @@ export class MachineService {
             data.current_job=null
         }
           return this.http.put(
-            this.apiUrl + '/machine/' + id + "/", data
+            this.auth.apiUrl + '/machine/' + id + "/", data
           );
       }
 
@@ -105,7 +104,7 @@ export class MachineService {
           let old_values = ""+JSON.stringify(object);
           this.auth.logChanges(old_values, this.model, "Delete", id).subscribe();
         })
-        return this.http.delete(this.apiUrl + "/machine/" + id + "/",
+        return this.http.delete(this.auth.apiUrl + "/machine/" + id + "/",
         {
             observe: 'events',
             responseType: 'text'

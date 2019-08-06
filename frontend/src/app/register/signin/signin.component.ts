@@ -12,7 +12,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class SigninComponent {
   error = "";
   isError = false;
-  apiUrl = 'http://localhost:8000/api';
   @ViewChild('data') signinForm: NgForm;
   user: Signin;
 

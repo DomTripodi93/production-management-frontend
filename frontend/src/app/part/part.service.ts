@@ -8,7 +8,6 @@ import { Change } from '../shared/change.model';
 
 @Injectable({providedIn: 'root'})
 export class PartService {
-    apiUrl = 'http://localhost:8000/api';
     partChanged = new Subject();
     partHold: Part;
     model = "Part";
@@ -25,7 +24,7 @@ export class PartService {
 
     fetchPart(search) {
         return this.http.get(
-          this.apiUrl + '/part/?' + search
+          this.auth.apiUrl + '/part/?' + search
         )
         .pipe(
           map((responseData: Part[]) => {
@@ -41,7 +40,7 @@ export class PartService {
 
     fetchPartById(id) {
         return this.http.get(
-          this.apiUrl + '/part/' + id + "/"
+          this.auth.apiUrl + '/part/' + id + "/"
         )
         .pipe(
           map((responseData: Part) => {
@@ -53,7 +52,7 @@ export class PartService {
   
     fetchAllParts() {
         return this.http.get(
-          this.apiUrl + '/part/'
+          this.auth.apiUrl + '/part/'
         )
         .pipe(
           map((responseData: Part[]) => {
@@ -74,7 +73,7 @@ export class PartService {
         });
         data.machine = this.auth.splitJoin(data.machine);
           return this.http.post(
-            this.apiUrl + '/part/', data
+            this.auth.apiUrl + '/part/', data
           );
       }
 
@@ -90,7 +89,7 @@ export class PartService {
         });
         data.machine = this.auth.splitJoin(data.machine);
           return this.http.put(
-            this.apiUrl + '/part/' + id + "/", data
+            this.auth.apiUrl + '/part/' + id + "/", data
           );
       }
 
@@ -99,7 +98,7 @@ export class PartService {
           let old_values = ""+JSON.stringify(object);
           this.auth.logChanges(old_values, this.model, "Delete", id).subscribe();
         })
-          return this.http.delete(this.apiUrl + "/part/" + id + "/",{
+          return this.http.delete(this.auth.apiUrl + "/part/" + id + "/",{
             observe: 'events',
             responseType: 'text'
             }

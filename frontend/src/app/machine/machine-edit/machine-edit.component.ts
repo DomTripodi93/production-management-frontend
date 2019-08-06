@@ -65,8 +65,9 @@ export class MachineEditComponent implements OnInit {
   }
 
   editMachine(data: Machine) {
-    this.mach.changeMachine(data, this.id).subscribe();
-    this.mach.machChanged.next();
+    this.mach.changeMachine(data, this.id).subscribe(()=>{
+      this.mach.machChanged.next();
+    });
     setTimeout(
       ()=>{
         this.router.navigate(["../.."], {relativeTo: this.route})

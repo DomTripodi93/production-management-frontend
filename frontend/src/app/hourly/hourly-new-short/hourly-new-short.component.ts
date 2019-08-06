@@ -51,8 +51,9 @@ export class HourlyNewShortComponent implements OnInit {
     if (!this.hourlyForm.value.counter_quantity){
       this.hourlyForm.value.counter_quantity = null;
     }
-    this.hourServ.addHourly(this.hourlyForm.value).subscribe();
-    this.hourServ.hourlyChanged.next()
+    this.hourServ.addHourly(this.hourlyForm.value).subscribe(()=>{
+      this.hourServ.hourlyChanged.next()
+    });
     this.onCancel()
   }
 

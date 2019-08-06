@@ -9,7 +9,6 @@ import { Machine } from '../machine/machine.model';
 
 @Injectable({providedIn: 'root'})
 export class HourlyService {
-    apiUrl = 'http://localhost:8000/api';
     hourlyChanged = new Subject();
     machineHold = "";
     quick = [];
@@ -24,7 +23,7 @@ export class HourlyService {
 
     fetchHourly(search) {
         return this.http.get(
-          this.apiUrl + '/hourly/?' + search
+          this.auth.apiUrl + '/hourly/?' + search
         )
         .pipe(
           map((responseData: Hourly[]) => {
@@ -38,7 +37,7 @@ export class HourlyService {
 
     fetchHourlyById(id) {
         return this.http.get(
-          this.apiUrl + '/hourly/' + id + "/"
+          this.auth.apiUrl + '/hourly/' + id + "/"
         )
         .pipe(
           map((responseData: Hourly) => {
@@ -50,7 +49,7 @@ export class HourlyService {
   
     fetchAllHourly() {
         return this.http.get(
-          this.apiUrl + '/hourly/'
+          this.auth.apiUrl + '/hourly/'
         )
         .pipe(
           map((responseData: Hourly[]) => {
@@ -65,7 +64,7 @@ export class HourlyService {
     addHourly(data: Hourly){
       data.machine = this.auth.splitJoin(data.machine);
         return this.http.post(
-          this.apiUrl + '/hourly/', data
+          this.auth.apiUrl + '/hourly/', data
         );
     }
 
@@ -77,7 +76,7 @@ export class HourlyService {
       })
       data.machine = this.auth.splitJoin(data.machine)
         return this.http.put(
-          this.apiUrl + '/hourly/' + id + "/", data
+          this.auth.apiUrl + '/hourly/' + id + "/", data
         );
     }
 
@@ -86,7 +85,7 @@ export class HourlyService {
         let old_values = ""+JSON.stringify(object);
         this.auth.logChanges(old_values, this.model, "Delete", id).subscribe();
       })
-        return this.http.delete(this.apiUrl + "/hourly/" + id + "/",{
+        return this.http.delete(this.auth.apiUrl + "/hourly/" + id + "/",{
           observe: 'events',
           responseType: 'text'
           }

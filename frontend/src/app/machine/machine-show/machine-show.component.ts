@@ -41,8 +41,9 @@ export class MachineShowComponent implements OnInit, OnDestroy{
 
   onDelete(id, machine){
     if (confirm("Are you sure you want to delete " +machine+ "?")){
-      this.mach.deleteMachine(id).subscribe();
-      setTimeout(()=>{this.mach.machChanged.next()}, 50);
+      this.mach.deleteMachine(id).subscribe(()=>{
+        setTimeout(()=>{this.mach.machChanged.next()}, 50);
+      });
     }
   }
 

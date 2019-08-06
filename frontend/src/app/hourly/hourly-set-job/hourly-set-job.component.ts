@@ -38,8 +38,9 @@ export class HourlySetJobComponent implements OnInit {
   }
 
   onSetJob(){
-    this.machServ.setCurrentJob(this.setJobForm.value, this.hourServ.machine.id).subscribe();
-    this.hourServ.hourlyChanged.next()
+    this.machServ.setCurrentJob(this.setJobForm.value, this.hourServ.machine.id).subscribe(()=>{
+      this.hourServ.hourlyChanged.next()
+    });
     this.onCancel()
   }
 

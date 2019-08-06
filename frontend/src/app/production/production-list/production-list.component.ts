@@ -50,14 +50,16 @@ export class ProductionListComponent implements OnInit {
 
   lotInQuestion(id){
     this.inQuestion.in_question = "True"
-    this.pro.setInQuestion(this.inQuestion, id).subscribe()
-    this.pro.proChanged.next()
+    this.pro.setInQuestion(this.inQuestion, id).subscribe(()=>{
+      this.pro.proChanged.next()
+    })
   }
 
   lotIsGood(id){
     this.inQuestion.in_question = "False"
-    this.pro.setInQuestion(this.inQuestion, id).subscribe()
-    this.pro.proChanged.next()
+    this.pro.setInQuestion(this.inQuestion, id).subscribe(()=>{
+      this.pro.proChanged.next()
+    })
   }
 
 }

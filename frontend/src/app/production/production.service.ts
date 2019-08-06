@@ -10,7 +10,6 @@ import { Part } from '../part/part.model';
 
 @Injectable({providedIn: 'root'})
 export class ProductionService {
-    apiUrl = 'http://localhost:8000/api';
     proChanged = new Subject();
     model = "Production"
 
@@ -22,7 +21,7 @@ export class ProductionService {
 
     fetchProduction(search) {
         return this.http.get(
-          this.apiUrl + '/production/?' + search
+          this.auth.apiUrl + '/production/?' + search
         )
         .pipe(
           map((responseData: Production[]) => {
@@ -40,7 +39,7 @@ export class ProductionService {
 
     fetchProductionById(id) {
         return this.http.get(
-          this.apiUrl + '/production/' + id + "/"
+          this.auth.apiUrl + '/production/' + id + "/"
         )
         .pipe(
           map((responseData: Production) => {
@@ -52,7 +51,7 @@ export class ProductionService {
   
     fetchAllProduction() {
         return this.http.get(
-          this.apiUrl + '/production/'
+          this.auth.apiUrl + '/production/'
         )
         .pipe(
           map((responseData: Production[]) => {
@@ -90,7 +89,7 @@ export class ProductionService {
         })
         data.machine = this.auth.splitJoin(data.machine);
           return this.http.post(
-            this.apiUrl + '/production/', data
+            this.auth.apiUrl + '/production/', data
           );
       }
 
@@ -102,7 +101,7 @@ export class ProductionService {
         })
         data.machine = this.auth.splitJoin(data.machine)
           return this.http.put(
-            this.apiUrl + '/production/' + id + "/", data
+            this.auth.apiUrl + '/production/' + id + "/", data
           );
       }
 
@@ -112,7 +111,7 @@ export class ProductionService {
           this.auth.logChanges(old_values, this.model, "In Question", id).subscribe();
         })
           return this.http.patch(
-            this.apiUrl + '/production/' + id + "/", data
+            this.auth.apiUrl + '/production/' + id + "/", data
           );
       }
 
@@ -121,7 +120,7 @@ export class ProductionService {
           let old_values = JSON.stringify(object);
           this.auth.logChanges(old_values, this.model, "Delete", id).subscribe();
         })
-          return this.http.delete(this.apiUrl + "/production/" + id + "/",{
+          return this.http.delete(this.auth.apiUrl + "/production/" + id + "/",{
             observe: 'events',
             responseType: 'text'
             }

@@ -55,8 +55,8 @@ export class MachineNewComponent implements OnInit {
   }
 
   newMachine(data: Machine) {
-    this.mach.machChanged.next();
     this.mach.addMachine(data).subscribe(()=>{
+      this.mach.machChanged.next();
     }, () =>
       this.error = "This machine already exists"
     );
@@ -66,6 +66,7 @@ export class MachineNewComponent implements OnInit {
       setTimeout(()=>{
       this.router.navigate([".."], {relativeTo: this.route})},50);
     }
+    
 
   }
 

@@ -86,9 +86,9 @@ export class PartEditComponent implements OnInit {
     if (this.isError){
       this.error = "That job already exsists on that machine!";
     }else{
-      this.partServ.partChanged.next();
       setTimeout(
         ()=>{
+          this.partServ.partChanged.next();
           this.router.navigate(["../.."], {relativeTo: this.route})
         }, 50
       );

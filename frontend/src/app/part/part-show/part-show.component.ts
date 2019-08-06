@@ -44,8 +44,9 @@ export class PartShowComponent implements OnInit, OnDestroy{
 
   onDelete(part, id){
     if (confirm("Are you sure you want to delete " +part+ "?")){
-      this.partServ.deletePart(id).subscribe();
-      this.partServ.partChanged.next();
+      this.partServ.deletePart(id).subscribe(()=>{
+        this.partServ.partChanged.next();
+      });
     }
   }
 
