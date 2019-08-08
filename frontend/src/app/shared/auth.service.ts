@@ -13,7 +13,7 @@ export class AuthService {
     user = '';
     name = '';
     isAuthenticated = false;
-    apiUrl = 'http://ec2-3-17-73-216.us-east-2.compute.amazonaws.com/';
+    apiUrl = 'http://ec2-3-17-73-216.us-east-2.compute.amazonaws.com';
     public authChanged = new Subject();
 
     constructor(

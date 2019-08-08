@@ -49,6 +49,7 @@ import { HourlySetJobComponent } from './hourly/hourly-set-job/hourly-set-job.co
 import { ChangeLogFullComponent } from './change-log/change-log-full/change-log-full.component';
 import { LengthComponent } from './part/calculator/by-weight/length/length.component';
 import { AuthInterceptorService } from './shared/auth-interceptor.service';
+import {DropdownDirective} from './shared/dropdown.directive';
 
 @NgModule({
   declarations: [
@@ -96,6 +97,7 @@ import { AuthInterceptorService } from './shared/auth-interceptor.service';
     HourlySetJobComponent,
     ChangeLogFullComponent,
     LengthComponent,
+    DropdownDirective,
   ],
   imports: [
     BrowserModule,

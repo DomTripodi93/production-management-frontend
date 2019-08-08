@@ -1,70 +1,46 @@
-<nav class='navbar navbar-default'>
-    <div class='container-fluid'>
-        <div class='navbar-header'>
-          <div class='navbar-default'><strong>
-            <ul class = 'nav navbar-nav'>
-              <li routerLinkActive="!active"><a routerLink='/'>Home</a></li>
-              <li
-                *ngIf="!id" 
-                routerLinkActive="active">
-                <a routerLink='/register'>Signup</a></li>
-              <li
-                *ngIf="!id" 
-                routerLinkActive="active">
-                <a routerLink='/login'>Signin</a></li>
-              <li
-                *ngIf="id" 
-                routerLinkActive="active">
-                <a routerLink='/logout'>Signout</a></li>
-              <li class="dropdown" *ngIf="id">
-                <a
-                class="dropdown-toggle" 
-                id="dropdownMenuButton" 
-                data-toggle="dropdown" 
-                type="button">Lathe
-                  <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu">
-                  <li routerLink='/machine'>Machines</li>
-                  <li routerLink='/parts'>Parts</li>
-                </ul>
-                  <!-- <a class="dropdown-item" routerLink='/hourly'>Hourly</a>
-                  <a class="dropdown-item" routerLink='/production'>Production</a>
-                  <a class="dropdown-item" routerLink='/parts/calculator'>Length From Weight</a> -->
 
-              </li>
-              <li
-                *ngIf="id" 
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{exact: true}">
-                <a routerLink='/machine'>Machines</a></li>
-              <li
-                *ngIf="id" 
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{exact: true}">
-                <a routerLink='/parts'>Parts</a></li>
-              <li 
-                *ngIf="id" 
-                routerLinkActive="active" 
-                [routerLinkActiveOptions]="{exact: true}">
-                <a routerLink='/production'>Production</a></li>
-              <li
-                *ngIf="id" 
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{exact: true}">
-                <a routerLink='/hourly'>Hourly</a></li>
-              <li 
-                *ngIf="id" 
-                routerLinkActive="active" 
-                [routerLinkActiveOptions]="{exact: true}">
-                <a routerLink='/parts/calculator'>Length From Weight</a></li>
-              <li 
-                *ngIf="id" 
-                routerLinkActive="active" 
-                [routerLinkActiveOptions]="{exact: true}">
-                <a routerLink='/changes'>Change Log</a></li>
+<nav class='navbar navbar-default'>
+  <div class='container-fluid'>
+      <div class='navbar-header'>
+      </div>
+      <div class='navbar-default'><strong>
+        <ul class = 'nav navbar-nav'>
+          <li routerLinkActive="!active"><a routerLink='/'>Home</a></li>
+          <li
+            *ngIf="!id" 
+            routerLinkActive="active">
+            <a routerLink='/register'>Signup</a></li>
+          <li
+            *ngIf="!id" 
+            routerLinkActive="active">
+            <a routerLink='/login'>Signin</a></li>
+          <li
+            *ngIf="id" 
+            routerLinkActive="active">
+            <a routerLink='/logout'>Signout</a></li>
+          <li class="dropdown" *ngIf="id" appDropdown>
+            <a
+            style ='cursor: pointer;'
+            class="dropdown-toggle"  
+            data-toggle="dropdown" 
+            type="button">Lathe
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a routerLink='/machine'>Machines</a></li>
+              <li><a routerLink='/parts'>Parts</a></li>
+              <li><a routerLink='/production'>Production</a></li>
+              <li><a routerLink='/hourly'>Hourly</a></li>
+              <li><a routerLink='/parts/calculator'>Length From Weight</a></li>
             </ul>
-          </strong></div>
-        </div>
+          </li> 
+          <li 
+            *ngIf="id" 
+            routerLinkActive="active" 
+            [routerLinkActiveOptions]="{exact: true}">
+            <a routerLink='/changes'>Change Log</a></li>
+        </ul>
+      </strong>
     </div>
+  </div>
 </nav>
