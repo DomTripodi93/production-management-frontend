@@ -66,60 +66,61 @@ export class MachineService {
         )
     }
 
-      addMachine(data: Machine){
-        if (!data.current_job){
-            data.current_job=null
-        }
-          return this.http.post(
-            this.auth.apiUrl + '/machine/', data
-          );
+    addMachine(data: Machine){
+      if (!data.current_job){
+          data.current_job=null
       }
-
-      setCurrentJob(job, id){
-        this.fetchMachineById(id).subscribe((object)=>{
-          let old_values = ""+JSON.stringify(object);
-          this.auth.logChanges(old_values, this.model, "Change Job", id).subscribe();
-        })
-        return this.http.patch(
-          this.auth.apiUrl + '/machine/' + id + "/", job
+        return this.http.post(
+          this.auth.apiUrl + '/machine/', data
         );
+    }
 
+    setCurrentJob(job, id){
+      this.fetchMachineById(id).subscribe((object)=>{
+        console.log(job);
+        let old_values = ""+JSON.stringify(object);
+        this.auth.logChanges(old_values, this.model, "Change Job", id).subscribe();
+      })
+      return this.http.patch(
+        this.auth.apiUrl + '/machine/' + id + "/", job
+      );
+
+    }
+
+    changeMachine(data: Machine, id){
+      this.fetchMachineById(id).subscribe((object)=>{
+        let old_values = ""+JSON.stringify(object);
+        this.auth.logChanges(old_values, this.model, "Update", id).subscribe();
+      })
+      if (!data.current_job){
+          data.current_job=null
       }
-
-      changeMachine(data: Machine, id){
-        this.fetchMachineById(id).subscribe((object)=>{
-          let old_values = ""+JSON.stringify(object);
-          this.auth.logChanges(old_values, this.model, "Update", id).subscribe();
-        })
-        if (!data.current_job){
-            data.current_job=null
-        }
-          return this.http.put(
-            this.auth.apiUrl + '/machine/' + id + "/", data
-          );
-      }
-
-      deleteMachine(id){
-        this.fetchMachineById(id).subscribe((object)=>{
-          let old_values = ""+JSON.stringify(object);
-          this.auth.logChanges(old_values, this.model, "Delete", id).subscribe();
-        })
-        return this.http.delete(this.auth.apiUrl + "/machine/" + id + "/",
-        {
-            observe: 'events',
-            responseType: 'text'
-        })
-        .pipe(
-            tap(event => {
-                console.log(event);
-                if (event.type === HttpEventType.Sent){
-                    console.log('control')
-                }
-                if (event.type === HttpEventType.Response) {
-                    console.log(event.body);
-                }
-            })
+        return this.http.put(
+          this.auth.apiUrl + '/machine/' + id + "/", data
         );
-      }
+    }
+
+    deleteMachine(id){
+      this.fetchMachineById(id).subscribe((object)=>{
+        let old_values = ""+JSON.stringify(object);
+        this.auth.logChanges(old_values, this.model, "Delete", id).subscribe();
+      })
+      return this.http.delete(this.auth.apiUrl + "/machine/" + id + "/",
+      {
+          observe: 'events',
+          responseType: 'text'
+      })
+      .pipe(
+          tap(event => {
+              console.log(event);
+              if (event.type === HttpEventType.Sent){
+                  console.log('control')
+              }
+              if (event.type === HttpEventType.Response) {
+                  console.log(event.body);
+              }
+          })
+      );
+    }
       
 }

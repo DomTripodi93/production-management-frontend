@@ -43,7 +43,7 @@ export class RemainingComponent implements OnInit, OnDestroy {
                   })
                 )};
               i++
-              }
+            }
             }else{
               this.calc.newBars();
           }

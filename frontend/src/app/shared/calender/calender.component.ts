@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import _ from 'lodash';
 import { NgForm } from '@angular/forms';
+import { AuthService } from 'src/app/shared/auth.service';
 
 @Component({
   selector: 'app-calender',
@@ -16,6 +17,7 @@ export class CalenderComponent implements OnInit {
   year = this.date.getFullYear();
   day = this.date.getDay();
   defaultMonth = ""; 
+  oldMonth: number = this.month;
   days = [
     "Sunday",
     "Monday",
@@ -43,11 +45,13 @@ export class CalenderComponent implements OnInit {
   monthDays = []
   firstDayOfMonth = []
   firstDay: Date;
-  welcome = ''
+  welcome = '';
 
 
 
-  constructor() { }
+  constructor(
+    private auth: AuthService
+  ) { }
 
 
   daysInMonth(year: number, month: number){
@@ -60,7 +64,11 @@ export class CalenderComponent implements OnInit {
     }
     this.defaultMonth = this.year +"-"+ this.monthHold
     this.setDate()
+    this.auth.authChanged.subscribe(()=>{
+      setTimeout(()=>{this.auth.checkNew(this.auth.user).subscribe()}, 50);
+    })
   }
+
 
   setDate(){
     this.daysInMonth(this.year, this.month);

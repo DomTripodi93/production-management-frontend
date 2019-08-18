@@ -25,6 +25,7 @@ export class AppComponent implements OnInit {
     this.auth.token = localStorage.getItem('token');
     if (this.auth.user){
       this.auth.isAuthenticated = true; 
+      this.auth.checkNew(this.auth.user).subscribe();
     } else {
       this.auth.isAuthenticated = false;
     }

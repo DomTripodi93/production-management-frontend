@@ -1,6 +1,6 @@
 <div>
   <div class="container">
-    <h3>{{welcome}}</h3>
+    <h3>{{welcome}}</h3><br>
     <br>
     <div class="row">
       <form (ngSubmit)='changeDate()' #newMonth="ngForm">
@@ -27,11 +27,13 @@
       <div class="border"><h5 class="centered">{{days[4]}}</h5></div>
       <div class="border"><h5 class="centered">{{days[5]}}</h5></div>
       <div class="border"><h5 class="centered">{{days[6]}}</h5></div>
-      <div *ngFor="let day of firstDayOfMonth">
-        <div class="border padded"><h5 class="white-text">{{day}}</h5></div>
+      <div *ngFor="let date of firstDayOfMonth">
+        <div class="border padded"><h5 class="white-text">{{date}}</h5></div>
       </div>  
-      <div *ngFor="let day of monthDays">
-        <div [routerLink] = "['day', year, month+1, day]" class="border padded"><h5>{{day}}</h5></div>
+      <div *ngFor="let date of monthDays">
+        <div *ngIf="date !== today" [routerLink] = "['day', year, month+1, day]" class="border padded"><h5>{{date}}</h5></div>
+        <div *ngIf="date == today && month == oldMonth" [routerLink] = "['day', year, month+1, day]" class="today-border padded"><h5>{{date}}</h5></div>
+        <div *ngIf="date == today && month != oldMonth" [routerLink] = "['day', year, month+1, day]" class="border padded"><h5>{{date}}</h5></div>
       </div>  
     </div>
   </div>

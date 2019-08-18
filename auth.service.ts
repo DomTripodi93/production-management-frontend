@@ -1,10 +1,9 @@
 import { Injectable } from "@angular/core";
 import { Subject } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { User } from '../register/user.model';
 import { Signin } from '../register/signin/signin.model';
-import { Change } from './change.model';
+import { map } from 'rxjs/operators';
 
 @Injectable({providedIn:'root'})
 export class AuthService {
@@ -12,9 +11,9 @@ export class AuthService {
     token = '';
     user = '';
     name = '';
-    isAuthenticated = false;
     isNew = false;
-    apiUrl = 'http://ec2-3-17-73-216.us-east-2.compute.amazonaws.com';
+    isAuthenticated = false;
+    apiUrl = 'http://localhost:8000/api';
     public authChanged = new Subject();
     makeOld = {
       is_new: false

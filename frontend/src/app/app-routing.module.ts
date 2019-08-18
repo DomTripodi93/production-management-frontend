@@ -36,9 +36,11 @@ import { JobTotalComponent } from './part/calculator/job-total/job-total.compone
 import { ChangeLogComponent } from './change-log/change-log.component';
 import { CalculatorComponent } from './part/calculator/calculator.component';
 import { LengthComponent } from './part/calculator/by-weight/length/length.component';
+import { SettingsComponent } from './shared/settings/settings.component';
 
 const appRoutes: Routes = [
     {path: '', component: CalenderComponent, pathMatch: 'full' },
+    {path: 'settings', component: SettingsComponent },
     {path: 'day/:year/:month/:day', component: DaysComponent, children:[
         {path: '', component: DaysFullComponent},
         {path: 'hourly', component: DaysHourlyComponent}

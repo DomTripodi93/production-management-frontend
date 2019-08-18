@@ -5,6 +5,12 @@
       </div>
       <div class='navbar-default'><strong>
         <ul class = 'nav navbar-nav'>
+          <li
+            routerLinkActive="!active">
+            <div routerLink='/'  class="logo">
+              <img src="../../assets/favicon.png" width="50px">
+            </div>
+          </li>
           <li routerLinkActive="!active"><a routerLink='/'>Home</a></li>
           <li
             *ngIf="!id" 
@@ -39,6 +45,13 @@
             routerLinkActive="active" 
             [routerLinkActiveOptions]="{exact: true}">
             <a routerLink='/changes'>Change Log</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li 
+            *ngIf="id" 
+            routerLinkActive="active" 
+            [routerLinkActiveOptions]="{exact: true}">
+            <a routerLink='/settings'>Settings</a></li>
         </ul>
       </strong>
     </div>

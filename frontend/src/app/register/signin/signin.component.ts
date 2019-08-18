@@ -33,6 +33,7 @@ export class SigninComponent {
         this.auth.name = responseData.body['name'];
         if (this.auth.user) {
           this.auth.isAuthenticated = true;
+          this.auth.checkNew(this.auth.user).subscribe();
         }
         localStorage.setItem('token', responseData.body['token']);
         localStorage.setItem('id', responseData.body['id']);

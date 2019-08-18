@@ -50,6 +50,8 @@ import { ChangeLogFullComponent } from './change-log/change-log-full/change-log-
 import { LengthComponent } from './part/calculator/by-weight/length/length.component';
 import { AuthInterceptorService } from './shared/auth-interceptor.service';
 import {DropdownDirective} from './shared/dropdown.directive';
+import { TutorialComponent } from './shared/tutorial/tutorial.component';
+import { SettingsComponent } from './shared/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +100,8 @@ import {DropdownDirective} from './shared/dropdown.directive';
     ChangeLogFullComponent,
     LengthComponent,
     DropdownDirective,
+    TutorialComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,

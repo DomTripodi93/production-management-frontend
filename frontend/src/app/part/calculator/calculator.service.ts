@@ -255,13 +255,13 @@ export class CalculatorService {
         let totalPieces = 0;
         for (let i in this.bars){
             this.partServ.partHold.bars = this.partServ.partHold.bars + this.bars[i].noBars + " " + this.bars[i].barLength + " "
-          let length;Number;
+          let length: Number;
           if (this.bars[i].barLength > this.latheForm.value.barEnd){ 
               length = this.bars[i].barLength - this.latheForm.value.barEnd;
           } else {
               length = 0
           }
-          let pieces = Math.floor(length/totalPartLength);
+          let pieces = Math.floor(+length/totalPartLength);
           let tempTotal = pieces * this.bars[i].noBars;
           totalPieces = totalPieces + tempTotal;
         }

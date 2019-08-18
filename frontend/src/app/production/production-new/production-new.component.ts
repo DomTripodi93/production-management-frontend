@@ -78,7 +78,9 @@ export class ProductionNewComponent implements OnInit {
   }
 
   newProduction(data: Production) {
-    this.pro.addProduction(data).subscribe();
+    this.pro.addProduction(data).subscribe(()=>{
+      this.pro.proChanged.next();
+    });
     this.router.navigate([".."], {relativeTo: this.route});
   }
 

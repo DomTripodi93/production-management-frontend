@@ -8,33 +8,39 @@
     grid-template-columns: 40% 20% 40%;
 }
 
+
 input{
     text-align: center;
 }
 
-.border{
+
+.today-border{
     border-style: solid;
     border-color: black;
+    background-color: rgb(255, 255, 175);
 }
 
 .white-text{
-    color: white;
+    color: rgb(235, 235, 235);
 }
+
 
 h1 {
     text-align: center;
 }
 
-h5{
+h5, h2{
     font-weight: bold;
     font-style: Helvetica;
 }
 
-.centered{
-    text-align: center;
-}
 
 .padded{
     padding-left: 10px;
     padding-bottom: 50px;
+}
+
+
+.centered{
+    text-align: center;
 }
