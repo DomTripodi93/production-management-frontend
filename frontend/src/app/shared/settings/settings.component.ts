@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AuthService } from 'src/app/shared/auth.service';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-settings',
@@ -16,19 +16,21 @@ export class SettingsComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.checkStatus();
+    this.subscriptions.push(
+        this.auth.checkNew(this.auth.user).subscribe(()=>{this.checkStatus()})
+    );
     this.subscriptions.push(
       this.auth.authChanged.subscribe(()=>{
-        setTimeout(()=>{this.auth.checkNew(this.auth.user).subscribe(); this.checkStatus()}, 50);
+        setTimeout(()=>{this.auth.checkNew(this.auth.user).subscribe(()=>{this.checkStatus()})}, 50);
       })
     );
   }
 
   checkStatus(){
-    if (this.auth.isNew == true){
-      this.tutorialStatus = "Currently not displaying tutorials."
-    } else {
+    if (this.auth.isNew === true){
       this.tutorialStatus = "Currently displaying tutorials."
+    } else {
+      this.tutorialStatus = "Currently not displaying tutorials."
     }
   }
 
