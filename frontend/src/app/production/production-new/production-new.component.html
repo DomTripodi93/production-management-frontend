@@ -11,14 +11,14 @@
         id="quantity" 
         class="form-control">
     </div>
-    <div class="form-group">
+    <div *ngIf="notRunning" class="form-group">
       <label for="job">Job</label>
       <select
         formControlName='job'
         type="text" 
         id="job" 
         class="form-control">
-        <option *ngFor = "let job of jobs">{{job}}</option>
+        <option *ngFor = "let mach of fullMach">{{mach.current_job}}</option>
       </select>        
     </div>
     <div class="form-group">
@@ -29,13 +29,22 @@
         class="form-control"
         formControlName='date'>
     </div>
-    <div class="form-group">
+    <div *ngIf="!notRunning" class="form-group">
       <label for="machine">Machine</label>
       <select 
         formControlName='machine'
         id="machine" 
         class="form-control">
         <option *ngFor = "let machine of machines">{{machine}}</option>
+      </select>
+    </div>
+    <div *ngIf="notRunning" class="form-group">
+      <label for="machine">Machine</label>
+      <select 
+        formControlName='machine'
+        id="machine" 
+        class="form-control">
+        <option *ngFor = "let mach of fullMach">{{mach.machine}}</option>
       </select>
     </div>
     <div class="form-group">

@@ -16,8 +16,9 @@ import { MachineService } from 'src/app/machine/machine.service';
 export class ProductionNewComponent implements OnInit {
   canInput= false;
   productionForm: FormGroup;
-  machines = []
-  jobs = [];
+  machines = [];
+  joblessMach = [];
+  fullMach: Machine[] = [];
   shifts = [
     "Day",
     "Night",
@@ -40,14 +41,14 @@ export class ProductionNewComponent implements OnInit {
       this.dayServe.resetDate();
     }
     this.mach.fetchMachineJobs()
-    .subscribe(machines => {
+    .subscribe((machines: Machine[]) => {
+      this.fullMach = machines;
       machines.forEach((mach)=>{
-        if (!this.jobs.includes(mach.current_job)){
-          if (mach.current_job !== "None"){
-            this.jobs.push(mach.current_job)
-          }
+        if (mach.current_job !== "None"){
+          this.machines.push(mach.machine)
+        } else {
+          this.joblessMach.push(mach.machine)
         }
-        this.machines.push(mach.machine)
       });
       this.machines.sort();
       this.initForm();
@@ -69,11 +70,16 @@ export class ProductionNewComponent implements OnInit {
       'date': new FormControl(date, Validators.required),
       'shift': new FormControl(this.shifts[0], Validators.required),
       'machine': new FormControl(this.machines[0], Validators.required),
-      'job': new FormControl(this.jobs[0], Validators.required)
+      'job': new FormControl(this.fullMach[0].current_job, Validators.required)
     });
   }
   
   onSubmit(){
+    this.fullMach.forEach((mach)=>{
+      if (mach.machine ===this.productionForm.value.machine){
+        this.productionForm.value.job = mach.current_job;
+      }
+    })
     this.newProduction(this.productionForm.value);
   }
 
