@@ -14,3 +14,8 @@ li {
     border: solid;
     border-color: red;
 }
+
+.grid2 { 
+    display: grid;
+    grid-template-columns: 40% 20% 40%;
+}

@@ -3,6 +3,7 @@ import { AuthService } from './shared/auth.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { DropdownDirective } from './shared/dropdown.directive';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,8 @@ export class AppComponent implements OnInit {
 
   public constructor(
     private auth: AuthService,
-    private titleService: Title
+    private titleService: Title,
+    private drop: DropdownDirective
   ){}
 
   ngOnInit(){
@@ -39,6 +41,17 @@ export class AppComponent implements OnInit {
 
   public setTitle( newTitle: string) {
     this.titleService.setTitle( newTitle );
+  }
+  
+  onActivate() {
+    let scrollToTop = window.setInterval(() => {
+        let pos = window.pageYOffset;
+        if (pos > 0) {
+            window.scrollTo(0, 0)
+        } else {
+            window.clearInterval(scrollToTop);
+        }
+    }, 16);
   }
 
 }

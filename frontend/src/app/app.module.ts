@@ -52,6 +52,7 @@ import { AuthInterceptorService } from './shared/auth-interceptor.service';
 import {DropdownDirective} from './shared/dropdown.directive';
 import { TutorialComponent } from './shared/tutorial/tutorial.component';
 import { SettingsComponent } from './shared/settings/settings.component';
+import { WelcomeComponent } from './shared/welcome/welcome.component';
 
 @NgModule({
   declarations: [
@@ -102,6 +103,7 @@ import { SettingsComponent } from './shared/settings/settings.component';
     DropdownDirective,
     TutorialComponent,
     SettingsComponent,
+    WelcomeComponent,
   ],
   imports: [
     BrowserModule,

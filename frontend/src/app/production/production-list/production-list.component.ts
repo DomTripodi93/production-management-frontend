@@ -3,6 +3,9 @@ import { Production } from '../production.model';
 import { ProductionService } from '../production.service';
 import { Subscription } from 'rxjs';
 import { DaysService } from '../../shared/days/days.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/shared/auth.service';
+import { MachineService } from 'src/app/machine/machine.service';
 
 @Component({
   selector: 'app-production-list',
@@ -21,15 +24,15 @@ export class ProductionListComponent implements OnInit {
 
   constructor(
     private pro: ProductionService,
-    private dayServ: DaysService
-  ) { }
+    private dayServ: DaysService,
+    private auth: AuthService    
+  ) {}
 
   ngOnInit() {
     this.getProduction();
     this.subscriptions.push(this.pro.proChanged.subscribe(()=>{
       setTimeout(()=>{this.getProduction()},50)}
     ))
-
   }
 
   getProduction(){
@@ -61,5 +64,6 @@ export class ProductionListComponent implements OnInit {
       this.pro.proChanged.next()
     })
   }
+
 
 }
