@@ -40,6 +40,7 @@ export class ProductionByJobSelectComponent implements OnInit {
         this.id = this.auth.user
       }
     )
+    this.total = 0;
   }
 
   getJobProduction() {
