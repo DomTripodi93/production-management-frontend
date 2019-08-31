@@ -40,7 +40,6 @@ export class ProductionByJobSelectComponent implements OnInit {
         this.id = this.auth.user
       }
     )
-    this.total = 0;
   }
 
   getJobProduction() {
@@ -50,6 +49,7 @@ export class ProductionByJobSelectComponent implements OnInit {
         this.production = production;
         this.dayServ.dates = [];
         this.production.forEach(pro => {
+          this.total = 0;
           this.total = +pro.quantity + this.total
           this.dayServ.dates.push(this.dayServ.dashToSlash(pro.date))
           // used in link to day's production
