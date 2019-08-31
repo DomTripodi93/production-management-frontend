@@ -46,15 +46,10 @@ export class ProductionComponent {
   }
 
   chooseMach(){
-    let machToSet = this.fullMach.find(mach =>{
-      mach.machine === this.chooseMachForm.value.machine
-    };
+    let machToSet = this.fullMach.find((mach: Machine) =>{
+      return mach.machine === this.chooseMachForm.value.machine
+    });
     let job = machToSet.current_job;
-//    this.fullMach.forEach((mach)=>{
-//      if (mach.machine == this.chooseMachForm.value.machine){
-//        job = mach.current_job;
-//      }
-//    })
     let machine = "&machine="+this.chooseMachForm.value.machine;
     let movement = "/production/"+job+machine;
     this.router.navigate([movement])
