@@ -48,8 +48,8 @@ export class ProductionByJobSelectComponent implements OnInit {
       .subscribe(production => {
         this.production = production;
         this.dayServ.dates = [];
+        this.total = 0;
         this.production.forEach(pro => {
-          this.total = 0;
           this.total = +pro.quantity + this.total
           this.dayServ.dates.push(this.dayServ.dashToSlash(pro.date))
           // used in link to day's production
