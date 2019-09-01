@@ -65,9 +65,46 @@ export class ProductionService {
 
     addProduction(data: Production){
       this.partServ.fetchPart("job=" + data.job).subscribe((parts: Part[])=>{
-        parts.forEach((part)=>{
+        let part = parts[0];
+        if (+part.remaining_quantity > 0){
+          let value = +part.remaining_quantity - data.quantity;
+          if (value >= 0){
+            part.remaining_quantity = "" + value;
+          } else {
+            part.remaining_quantity = "0"
+          }
+        } else if (!part.remaining_quantity && part.possible_quantity){
+          let value = +part.possible_quantity - data.quantity;
+          part.remaining_quantity = "" + value;
+        } else if (!part.remaining_quantity && part.order_quantity){
+          let value = +part.order_quantity - data.quantity;
+          part.remaining_quantity = "" + value;
+        } else if (!part.remaining_quantity && part.weight_quantity){
+          let value = +part.weight_quantity - data.quantity;
+          part.remaining_quantity = "" + value;
+        }
+        this.partServ.changePart(part, part.id).subscribe()
+      })
+      data.machine = this.auth.splitJoin(data.machine);
+        return this.http.post(
+          this.auth.apiUrl + '/production/', data
+        );
+    }
+
+
+    changeProduction(data: Production, id){
+      let oldQuantity: number;
+      this.fetchProductionById(id).subscribe((production)=>{
+        oldQuantity = +production.quantity;
+        let old_values = ""+JSON.stringify(production);
+        this.auth.logChanges(old_values, this.model, "Update", id).subscribe();
+        this.partServ.fetchPart("job=" + data.job).subscribe((parts: Part[])=>{
+          let part = parts[0];
           if (+part.remaining_quantity > 0){
-            let value = +part.remaining_quantity - data.quantity;
+            let dif = data.quantity ;
+            let rem = +part.remaining_quantity;
+            let mid = rem + oldQuantity
+            let value = mid - dif
             if (value >= 0){
               part.remaining_quantity = "" + value;
             } else {
@@ -86,18 +123,6 @@ export class ProductionService {
           this.partServ.changePart(part, part.id).subscribe()
         })
       })
-      data.machine = this.auth.splitJoin(data.machine);
-        return this.http.post(
-          this.auth.apiUrl + '/production/', data
-        );
-    }
-
-
-    changeProduction(data: Production, id){
-      this.fetchProductionById(id).subscribe((object)=>{
-        let old_values = ""+JSON.stringify(object);
-        this.auth.logChanges(old_values, this.model, "Update", id).subscribe();
-      })
       data.machine = this.auth.splitJoin(data.machine)
         return this.http.put(
           this.auth.apiUrl + '/production/' + id + "/", data
@@ -115,9 +140,27 @@ export class ProductionService {
     }
 
     deleteProduction(id){
-      this.fetchProductionById(id).subscribe((object)=>{
-        let old_values = JSON.stringify(object);
+      let oldJob;
+      let oldQuantity: number;
+      this.fetchProductionById(id).subscribe((production)=>{
+        oldQuantity = +production.quantity;
+        oldJob = production.job;
+        let old_values = JSON.stringify(production);
         this.auth.logChanges(old_values, this.model, "Delete", id).subscribe();
+        this.partServ.fetchPart("job=" + oldJob).subscribe((parts: Part[])=>{
+          let part = parts[0];
+          if (+part.remaining_quantity > 0){
+            let rem = +part.remaining_quantity;
+            let mid = rem + oldQuantity
+            let value = mid
+            if (value >= 0){
+              part.remaining_quantity = "" + value;
+            } else {
+              part.remaining_quantity = "0"
+            }
+          } 
+          this.partServ.changePart(part, part.id).subscribe()
+        })
       })
         return this.http.delete(this.auth.apiUrl + "/production/" + id + "/",{
           observe: 'events',

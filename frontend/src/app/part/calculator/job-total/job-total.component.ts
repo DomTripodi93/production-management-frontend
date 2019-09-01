@@ -24,7 +24,6 @@ export class JobTotalComponent implements OnInit, OnDestroy {
     this.route.params.subscribe((params: Params) =>{
       this.id = +params['id'];
     });
-    this.initForm()
     setTimeout(()=>{
       this.partServ.fetchPartById(this.id)
       .subscribe(part => {

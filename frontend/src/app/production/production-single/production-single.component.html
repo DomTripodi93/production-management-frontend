@@ -1,4 +1,4 @@
-<ul class='list-group'>
+<ul *ngIf="production" class='list-group'>
     <li *ngIf="production.in_question" class='inQuestion list-group-item'>
         <div *ngIf="production" >
             <h4>Date: {{production.date}}</h4>

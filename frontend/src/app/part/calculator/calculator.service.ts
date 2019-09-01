@@ -95,7 +95,8 @@ export class CalculatorService {
         this.partServ.partHold.oal = this.latheForm.value.oal;
         this.facing = this.latheForm.value.mainFacing + this.latheForm.value.subFacing;
         this.bars = this.latheForm.value.bars;
-        this.partServ.partHold.remaining_quantity = ""+this.calculateQuantity();
+        this.partsToMake = this.calculateQuantity();
+        this.partServ.partHold.remaining_quantity = ""+this.partsToMake
         this.partServ.changePart(this.partServ.partHold, this.partServ.partHold.id).subscribe();
         this.submitted = true;
     }

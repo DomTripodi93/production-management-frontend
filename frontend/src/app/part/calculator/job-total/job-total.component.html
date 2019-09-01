@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div *ngIf="calc.latheForm" class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+    <div *ngIf="calc.latheForm && partServ.partHold" class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
       <form (ngSubmit)='calc.onSubmitTotal()' [formGroup]="calc.latheForm">
         <div class='form-group'>
           <div class='form-group'>
